@@ -12,12 +12,27 @@ class Model_Main extends Model
 		$this->pdo = parent::getPdo();
 	}
 
-	public function getTasks($offset = 0)
+	public function getTasks($ob, $offset)
 	{
+		switch ($ob)
+		{
+			case 'username':
+				$ob = 'username';
+				break;
+			case 'e-mail':
+				$ob = 'e-mail';
+				break;
+			case 'status':
+				$ob = 'status';
+				break;
+			default:
+				$ob = 'tid';
+				break;
+		}
 		$count_stmt = $this->pdo->prepare("SELECT count(*) as 'count' FROM `tasks`");
 		$count_stmt->execute();
 		$task_count = $count_stmt->fetch()['count'];
-		$stmt = $this->pdo->prepare("SELECT * FROM `tasks` LIMIT 3 OFFSET ".intval($offset * 3));
+		$stmt = $this->pdo->prepare("SELECT * FROM `tasks` ORDER BY `".$ob."` ASC LIMIT 3 OFFSET ".intval($offset * 3));
 		$stmt->execute();
 		$task_array = $stmt->fetchAll();
 		return (array($task_array, $task_count));

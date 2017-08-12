@@ -2,6 +2,18 @@
 <div class="row">
 	<div class="col"></div>
 	<div class="col-md-10">
+	<div class="row-fluid sort">
+	<form class="form-inline" method="get" action="/main/index/">
+		<label class="mr-sm-2" for="inlineFormCustomSelect">Sort by</label>
+		<select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect" name="ob">
+			<option value="username" <?php if(!isset($ob) || $ob == "username") {echo "selected";}?>>username</option>
+			<option value="e-mail" <?php if($ob == "e-mail") {echo "selected";}?>>e-mail</option>
+			<option value="status" <?php if ($ob == "status") {echo "selected";} ?>>status</option>
+		</select>
+		<input type="text" name="page" value="<?=$page?>" hidden>
+		<button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+	</div>
 		<?php
 		foreach ($tasks as $task)
 		{
@@ -49,24 +61,24 @@
 <nav class="pages">
 	<ul class="pagination justify-content-center">
 		<li class="page-item <?php if (($page - 2) * 3 < 0) {echo "disabled";}?>">
-			<a class="page-link" href="/main/index/?page=<?=$page-2?>" tabindex="-1">Previous</a>
+			<a class="page-link" href="/main/index/?page=<?=$page-2?>&ob=<?=$ob?>" tabindex="-1">Previous</a>
 		</li>
 		<?php if ($page - 1 >= 0) { ?>
 		<li class="page-item">
-			<a class="page-link" href="/main/index/?page=<?=$page-1?>"><?=$page-1?></a>
+			<a class="page-link" href="/main/index/?page=<?=$page-1?>&ob=<?=$ob?>"><?=$page-1?></a>
 		</li>
 		<?php } ?>
 		<li class="page-item disabled">
-			<a class="page-link" href="/main/index/?page=<?=$page?>"><?=$page?></a>
+			<a class="page-link" href="/main/index/?page=<?=$page?>&ob=<?=$ob?>"><?=$page?></a>
 		</li>
 		<?php
 		if (($page + 1) * 3 < $count) { ?>
 		<li class="page-item">
-			<a class="page-link" href="/main/index/?page=<?=$page+1?>"><?=$page+1?></a>
+			<a class="page-link" href="/main/index/?page=<?=$page+1?>&ob=<?=$ob?>"><?=$page+1?></a>
 		</li>
 		<?php } ?>
 		<li class="page-item <?php if (($page + 2) * 3 >= $count) {echo "disabled";}?>">
-			<a class="page-link" href="/main/index/?page=<?=$page+2?>">Next</a>
+			<a class="page-link" href="/main/index/?page=<?=$page+2?>&ob=<?=$ob?>">Next</a>
 		</li>
 	</ul>
 </nav>

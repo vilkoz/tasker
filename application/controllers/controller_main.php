@@ -12,16 +12,22 @@ class Controller_Main extends Controller
 
 	public function actionIndex()
 	{
-		if (isset($_GET) && isset($_GET['page']) && !empty($_GET['page']))
+		if (isset($_GET) && isset($_GET['page']) && isset($_GET['ob']))
 		{
+			$ob = $_GET['ob'];
 			$page = intval($_GET['page']);
 			list($tasks, $task_count) =
-				$this->model->getTasks(intval($_GET['page']));
+				$this->model->getTasks($ob, $page);
+		}
+		else if (isset($_GET) && isset($_GET['page']))
+		{
+			$page = intval($_GET['page']);
+			list($tasks, $task_count) = $this->model->getTasks('tid', $page);
 		}
 		else
 		{
 			$page = 0;
-			list($tasks, $task_count) = $this->model->getTasks();
+			list($tasks, $task_count) = $this->model->getTasks('tid', 0);
 		}
 		$this->view->generate(
 			'view_main.php',
@@ -30,7 +36,8 @@ class Controller_Main extends Controller
 				'title' => 'Tasker',
 				'tasks' => $tasks,
 				'count' => $task_count,
-				'page' => $page
+				'page' => $page,
+				'ob' => isset($ob) ? $ob : ""
 			)
 		);
 	}

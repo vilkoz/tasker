@@ -103,3 +103,12 @@ p.text-wrap {
 #complete-btn, #not-complete-btn, #edit-btn {
 	display: flex;
 }
+
+.sort {
+	margin: 0em 0em 1em 0em;
+	padding: 1em;
+	display: block;
+	border: 1px solid;
+	border-radius: 4px;
+	align-items: center;
+}
