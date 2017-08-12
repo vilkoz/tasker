@@ -1,11 +1,10 @@
 <?php
 include 'database.php';
 
-$this->pdo = new PDO($DB_DSN, $DB_USER, $DB_PASS);
-$this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 try
 {
 	$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASS);
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 catch (PDOException $e)
 {
@@ -14,7 +13,7 @@ catch (PDOException $e)
 }
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $sql = file_get_contents('tasker.sql');
-try 
+try
 {
 	$pdo->exec($sql);
 }
