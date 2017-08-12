@@ -1,6 +1,17 @@
 <?php
 include 'database.php';
 
+echo getenv("CLEARDB_DATABASE_URL");
+echo "\n";
+print_r($url);
+echo "\n";
+echo $DB_DSN;
+echo "\n";
+echo $DB_USER;
+echo "\n";
+echo $DB_PASS;
+echo "\n";
+echo "SERVER_NAME: ".$_SERVER['SERVER_NAME']."\n";
 try
 {
 	$pdo = new PDO($DB_DSN, $DB_USER, $DB_PASS);
