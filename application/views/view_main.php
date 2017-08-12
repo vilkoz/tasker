@@ -1,27 +1,43 @@
 <div class="container" id="content">
 <div class="row">
 	<div class="col"></div>
-	<div class="col-md-8">
+	<div class="col-md-10">
 		<?php
 		foreach ($tasks as $task)
 		{
 		?>
-			<div class="card <?php if($task['status']) {echo "border-secondary";}?>">
+			<div class="card bot-margin <?php if($task['status']) {echo "border-secondary";}?>">
 				<div class="card-header">
 					<?=$task['username']?> &lt;<?=$task['e-mail']?>&gt;
+<?php if(isset($_SESSION['user'])) { ?>
+<?php if($_SESSION['user'] == 'admin' && $task['status'] == 0) {?>
+	<br>
+	<button type="button" class="btn btn-primary complete-btn" value="<?=$task['tid']?>">Set completed</button>
+<?php }?>
+<?php if($_SESSION['user'] == 'admin' && $task['status'] == 1) {?>
+	<br>
+	<button type="button" class="btn btn-primary not-complete-btn" value="<?=$task['tid']?>">Set not completed</button>
+<?php }?>
+<?php if($_SESSION['user'] == 'admin') {?>
+	<button type="button" class="btn btn-success edit-btn" value="<?=$task['tid']?>">Edit text</button>
+<?php }?>
+<?php }?>
 				</div>
-				<div class="card-body <?php if($task['status']) {echo "text-secondary";}?>">
+				<div class="card-body media <?php if($task['status']) {echo "text-secondary";}?>">
 					<div class="row justify-content-md-center">
-						<div class="col-lg-6">
 					<?php
-					echo '<img class="card-img-left" src="/images/'.$task['image'].'" alt="">';
+					echo '<img class="d-flex align-self-center img-center" src="/images/'.$task['image'].'" alt="">';
 					?>
-						</div>
-						<div class="col-lg-6">
+						<div class="media-body">
 							<p class="text-wrap"><?=$task['text']?></p>
 						</div>
 					</div>
 				</div>
+<?php if($task['status']) { ?>
+				<div class="card-footer text-muted">
+						Completed
+				</div>
+<?php } ?>
 			</div>
 		<?php
 		}

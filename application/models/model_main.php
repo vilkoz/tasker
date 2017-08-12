@@ -22,6 +22,22 @@ class Model_Main extends Model
 		$task_array = $stmt->fetchAll();
 		return (array($task_array, $task_count));
 	}
+
+	public function toggleTask($tid)
+	{
+		$stmt = $this->pdo->prepare("UPDATE `tasks` SET `status` = 1 - `status` WHERE `tid` = :tid");
+		$stmt->bindParam(":tid", $tid);
+		$stmt->execute();
+	}
+
+	public function editText($tid, $text)
+	{
+		$text = htmlspecialchars($text, ENT_QUOTES | ENT_HTML5);
+		$stmt = $this->pdo->prepare("UPDATE `tasks` SET `text` = :text WHERE `tid` = :tid");
+		$stmt->bindParam(":tid", $tid);
+		$stmt->bindParam(":text", $text);
+		$stmt->execute();
+	}
 }
 
  ?>

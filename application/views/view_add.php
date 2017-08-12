@@ -1,6 +1,6 @@
-<form onsubmit="return false;">
-	<div class="alert alert-danger" role="alert" id="response">
-	</div>
+<div class="alert alert-danger" role="alert" id="response">
+</div>
+<form onsubmit="return false;" id="send-form">
 	<div class="form-group">
 		<label for="username">Name</label>
 		<input type="text" class="form-control" id="username" name="username" placeholder="Enter your name" required/>
@@ -20,5 +20,5 @@
 		</label>
 	</div>
 	<button type="submit" class="btn btn-primary" id="send">Submit</button>
-	<button type="submit" class="btn btn-primary">Perview</button>
+	<button type="button" class="btn btn-primary" id="perview">Perview</button>
 </form>

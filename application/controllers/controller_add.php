@@ -42,8 +42,8 @@ class Controller_add extends Controller
 		$image = imagecreatefromstring(
 			(file_get_contents($image_path))
 		);
-		//$image = $this->loadImageFromPath($image_path, $image_type);
 		list($width, $height) = getimagesize($image_path);
+		$proportion = 1;
 		if ($width > 320 || $height > 240)
 		{
 			if ($width / 320 > $height / 240)

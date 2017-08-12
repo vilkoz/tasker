@@ -34,6 +34,27 @@ class Controller_Main extends Controller
 			)
 		);
 	}
+	public function actionToggle()
+	{
+		if (!isset($_SESSION))
+			session_start();
+		if (!isset($_SESSION) || !isset($_SESSION['user']) || $_SESSION['user'] !== 'admin')
+			die("YOU DO NOT HAVE PERMISSIONS FOR THAT");
+		if (!isset($_POST) || !isset($_POST['tid']))
+			die("NOT ENOUGH PARAMETERS");
+		$this->model->toggleTask(intval($_POST['tid']));
+	}
+
+	public function actionEdit()
+	{
+		if (!isset($_SESSION))
+			session_start();
+		if (!isset($_SESSION) || !isset($_SESSION['user']) || $_SESSION['user'] !== 'admin')
+			die("YOU DO NOT HAVE PERMISSIONS FOR THAT");
+		if (!isset($_POST) || !isset($_POST['tid']) || !isset($_POST['text']))
+			die("NOT ENOUGH PARAMETERS");
+		$this->model->editText(intval($_POST['tid']), $_POST['text']);
+	}
 }
 
 ?>

@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<?php
+if (!isset($_SESSION))
+	session_start();
+ ?>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -13,12 +17,30 @@
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
 	</head>
 	<body>
-	<nav class="navbar navbar-dark bg-dark">
+	<nav class="navbar navbar-dark bg-dark bot-margin navbar-expand-sm">
 		<a class="navbar-brand" href="/">
 			Tasker
 		</a>
+		<button class="navbar-toggler" type="button"
+			data-toggle="collapse" data-target="#navbarText"
+			aria-controls="navbarText" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarText">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
 		<button class="btn btn-outline-success align-center" type="submit" id="new-task">New task</button>
-		<button class="btn btn-outline-info align-center" type="submit">Admin login</button>
+				</li>
+				<li class="nav-item">
+<?php if (isset($_SESSION['user'])) { ?>
+		<button class="btn btn-outline-info align-center" type="submit" id="admin-logout">Logout</button>
+<?php } else { ?>
+		<button class="btn btn-outline-info align-center" type="submit" id="admin-login">Admin login</button>
+<?php } ?>
+				</li>
+			</ul>
+		</div>
 
 	</nav>
 		<?php
