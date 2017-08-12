@@ -70,7 +70,7 @@ class Controller_add extends Controller
 		{
 			die("Please fill all required form fields!");
 		}
-		if (isset($_FILES))
+		if (isset($_FILES) && isset($_FILES['file']))
 		{
 			try
 			{
@@ -82,6 +82,10 @@ class Controller_add extends Controller
 			{
 				die($e->message());
 			}
+		}
+		else
+		{
+			$image_path = 'none';
 		}
 		$data = array_filter($_POST, function ($k)
 		{

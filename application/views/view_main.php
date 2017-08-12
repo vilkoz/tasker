@@ -37,9 +37,12 @@
 				</div>
 				<div class="card-body media <?php if($task['status']) {echo "text-secondary";}?>">
 					<div class="row justify-content-md-center">
-					<?php
+<?php
+	if ($task['image'] != 'none')
+	{
 					echo '<img class="d-flex align-self-center img-center" src="/images/'.$task['image'].'" alt="">';
-					?>
+	}
+?>
 						<div class="media-body">
 							<p class="text-wrap"><?=$task['text']?></p>
 						</div>
