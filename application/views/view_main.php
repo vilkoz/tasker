@@ -65,7 +65,7 @@
 			<a class="page-link" href="/main/index/?page=<?=$page+1?>"><?=$page+1?></a>
 		</li>
 		<?php } ?>
-		<li class="page-item <?php if (($page + 2) >= $count) {echo "disabled";}?>">
+		<li class="page-item <?php if (($page + 2) * 3 >= $count) {echo "disabled";}?>">
 			<a class="page-link" href="/main/index/?page=<?=$page+2?>">Next</a>
 		</li>
 	</ul>
