@@ -48,8 +48,8 @@
 </div>
 <nav class="pages">
 	<ul class="pagination justify-content-center">
-		<li class="page-item <?php if ($page - 3 < 0) {echo "disabled";}?>">
-			<a class="page-link" href="/main/index/?page=<?=$page-3?>" tabindex="-1">Previous</a>
+		<li class="page-item <?php if (($page - 2) * 3 < 0) {echo "disabled";}?>">
+			<a class="page-link" href="/main/index/?page=<?=$page-2?>" tabindex="-1">Previous</a>
 		</li>
 		<?php if ($page - 1 >= 0) { ?>
 		<li class="page-item">
@@ -65,8 +65,8 @@
 			<a class="page-link" href="/main/index/?page=<?=$page+1?>"><?=$page+1?></a>
 		</li>
 		<?php } ?>
-		<li class="page-item <?php if (($page + 3) * 3 >= $count) {echo "disabled";}?>">
-			<a class="page-link" href="/main/index/?page=<?=$page+3?>">Next</a>
+		<li class="page-item <?php if (($page + 2) >= $count) {echo "disabled";}?>">
+			<a class="page-link" href="/main/index/?page=<?=$page+2?>">Next</a>
 		</li>
 	</ul>
 </nav>
