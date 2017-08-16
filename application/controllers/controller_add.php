@@ -21,27 +21,22 @@ class Controller_add extends Controller
 		);
 	}
 
-	private function loadImageFromPath($image_path, $image_type)
-	{
-		if ($image_type == 'image/jpeg')
-			$image = imagecreatefromjpeg($image_path);
-		elseif ($image_type == 'image/png')
-			$image = imagecreatefrompng($image_path);
-		elseif ($image_type == 'image/gif')
-			$image = imagecreatefromgif($image_path);
-		elseif ($image_type == 'image/xpm')
-			$image = imagecreatefromxpm($image_path);
-		else
-		{
-			throw new WrongFileException("This file format is not supported!");
-		}
-	}
-
 	private function saveImage($image_path, $image_type)
 	{
-		$image = imagecreatefromstring(
-			(file_get_contents($image_path))
-		);
+        try
+        {
+            $image = @imagecreatefromstring(
+                (file_get_contents($image_path))
+            );
+        }
+        catch (Exception $e)
+        {
+			throw new Exception("This file format is not supported!");
+        }
+        if (!$image)
+        {
+			throw new Exception("This file format is not supported!");
+        }
 		list($width, $height) = getimagesize($image_path);
 		$proportion = 1;
 		if ($width > 320 || $height > 240)
@@ -78,9 +73,9 @@ class Controller_add extends Controller
 					$_FILES['file']['tmp_name'],
 					$_FILES['file']['type']);
 			}
-			catch (WrongFileException $e)
+			catch (Exception $e)
 			{
-				die($e->message());
+				die($e->getMessage());
 			}
 		}
 		else
@@ -100,6 +95,5 @@ class Controller_add extends Controller
 		echo "SUCCESS";
 	}
 }
-class WrongFileException extends Exception {}
 
 ?>
